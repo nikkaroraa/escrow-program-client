@@ -4,12 +4,38 @@ import { useForm } from 'react-hook-form'
 import Input from 'components/input'
 import FormLabel from 'components/form-label'
 import FormControl from 'components/form-control'
+import { takeTrade } from 'utils/escrow'
 
 function Initializer() {
   const { register, handleSubmit } = useForm()
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = async (data) => {
+    const {
+      privateKey,
+      programId,
+      tokenToReceiveAccountPubkey,
+      tokenAccountPubkey,
+      escrowAccountPubkey,
+      xTokenAmount,
+    } = data
+
+    try {
+      await takeTrade(
+        privateKey,
+        escrowAccountPubkey,
+        tokenToReceiveAccountPubkey,
+        tokenAccountPubkey,
+        xTokenAmount,
+        programId,
+      )
+      alert('Success! Alice and Bob have traded their tokens and all temporary accounts have been closed')
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err)
+      } else {
+        console.error('A message-less error occurred')
+      }
+    }
   }
 
   return (
