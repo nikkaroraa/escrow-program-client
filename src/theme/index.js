@@ -9,6 +9,7 @@ import { opacity } from './opacity'
 import { shadows } from './shadows'
 import { borders, borderWidths } from './borders'
 import { icons } from './icons'
+import { components } from './components'
 
 const space = baseSizes
 
@@ -25,6 +26,7 @@ const overrides = {
   borders,
   borderWidths,
   icons,
+  components,
 }
 
 const theme = extendTheme(overrides)

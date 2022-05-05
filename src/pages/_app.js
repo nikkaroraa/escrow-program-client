@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types'
 import Head from 'next/head'
 import { Global } from '@emotion/react'
+import { ChakraProvider } from '@chakra-ui/react'
 
 import { globalStyles } from 'styles/global'
+import theme from 'theme'
 
 function App({ Component, pageProps }) {
   return (
@@ -14,8 +16,10 @@ function App({ Component, pageProps }) {
         />
       </Head>
 
-      <Global styles={globalStyles()} />
-      <Component {...pageProps} />
+      <ChakraProvider theme={theme}>
+        <Global styles={globalStyles()} />
+        <Component {...pageProps} />
+      </ChakraProvider>
     </>
   )
 }
