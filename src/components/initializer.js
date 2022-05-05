@@ -1,15 +1,51 @@
-import { Stack, Button, Heading } from '@chakra-ui/react'
+import { Stack, Button, Heading, Grid } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 
 import Input from 'components/input'
 import FormLabel from 'components/form-label'
 import FormControl from 'components/form-control'
+import { initEscrow } from 'utils/escrow'
 
 function Initializer() {
+  const [escrowState, setEscrowState] = useState({})
   const { register, handleSubmit } = useForm()
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = async (data) => {
+    const { privateKey, programId, tokenAccountPubkey, tokenToReceiveAccountPubkey, xTokenAmount, yTokenAmount } = data
+
+    try {
+      const {
+        escrowAccountPubkey,
+        isInitialized,
+        initializerAccountPubkey,
+        xTempTokenAccountPubkey,
+        initializerYTokenAccount,
+        expectedAmount,
+      } = await initEscrow(
+        privateKey,
+        tokenAccountPubkey,
+        xTokenAmount,
+        tokenToReceiveAccountPubkey,
+        yTokenAmount,
+        programId,
+      )
+
+      setEscrowState({
+        escrowAccountPubkey,
+        isInitialized,
+        initializerAccountPubkey,
+        xTempTokenAccountPubkey,
+        initializerYTokenAccount,
+        expectedAmount,
+      })
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error)
+      } else {
+        console.error('A message-less error occurred')
+      }
+    }
   }
 
   return (
@@ -59,9 +95,14 @@ function Initializer() {
           />
         </FormControl>
 
-        <Button type="submit" variant="primary" width="full">
-          create escrow
-        </Button>
+        <Grid templateColumns={'1fr 1fr'} width="full" columnGap={4} pt={4}>
+          <Button type="reset" variant="grayscale" width="full" rounded="md">
+            reset
+          </Button>
+          <Button type="submit" variant="primary" rounded="md" width="full">
+            create escrow
+          </Button>
+        </Grid>
       </Stack>
     </Stack>
   )

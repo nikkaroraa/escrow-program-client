@@ -5,7 +5,7 @@ import Taker from 'components/taker'
 
 function Home() {
   return (
-    <Box px={6} py={10}>
+    <Box px={6} py={10} letterSpacing="wide">
       <Heading as="h2" mb={20} textAlign="center">
         Escrow Program UI
       </Heading>

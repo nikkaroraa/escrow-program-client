@@ -1,0 +1,31 @@
+
+
+x:
+  mint account: 
+  supply: 
+
+y: 
+  mint account: 
+  supply: 
+
+initializer
+  private key:
+  address:
+  x token account:
+    address:
+    balance:
+  y token account:
+    address:
+    balance:
+
+taker
+  private key:
+  address:
+  x token account:
+    address:
+    balance:
+  y token account:
+    address:
+    balance:
+
+escrow program id: 

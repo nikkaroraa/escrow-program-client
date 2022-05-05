@@ -1,4 +1,4 @@
-import { Stack, Button, Heading } from '@chakra-ui/react'
+import { Stack, Button, Heading, Grid } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 
 import Input from 'components/input'
@@ -51,9 +51,14 @@ function Initializer() {
           <Input id="xTokenAmount" placeholder="amount of X tokens that taker expects" {...register('xTokenAmount')} />
         </FormControl>
 
-        <Button type="submit" variant="primary" width="full">
-          take trade
-        </Button>
+        <Grid templateColumns={'1fr 1fr'} width="full" columnGap={4} pt={4}>
+          <Button variant="grayscale" width="full" rounded="md">
+            reset
+          </Button>
+          <Button type="submit" variant="primary" rounded="md" width="full">
+            take trade
+          </Button>
+        </Grid>
       </Stack>
     </Stack>
   )
