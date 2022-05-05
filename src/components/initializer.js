@@ -1,4 +1,4 @@
-import { Stack, Button, Heading, Grid } from '@chakra-ui/react'
+import { Stack, Button, Heading, Grid, Text } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 
@@ -19,7 +19,7 @@ function Initializer() {
         escrowAccountPubkey,
         isInitialized,
         initializerAccountPubkey,
-        xTempTokenAccountPubkey,
+        XTokenTempAccountPubkey,
         initializerYTokenAccount,
         expectedAmount,
       } = await initEscrow(
@@ -35,7 +35,7 @@ function Initializer() {
         escrowAccountPubkey,
         isInitialized,
         initializerAccountPubkey,
-        xTempTokenAccountPubkey,
+        XTokenTempAccountPubkey,
         initializerYTokenAccount,
         expectedAmount,
       })
@@ -103,6 +103,42 @@ function Initializer() {
             create escrow
           </Button>
         </Grid>
+      </Stack>
+
+      <Heading as="h3" fontSize={'2xl'}>
+        Trade Info
+      </Heading>
+      <Stack>
+        <Stack isInline>
+          <Text>Escrow Account:</Text>
+          <Text>{escrowState.escrowAccountPubkey ?? '--'}</Text>
+        </Stack>
+
+        <Text>Decoded State:</Text>
+        <Stack isInline>
+          <Text>Is initialized:</Text>
+          <Text>{escrowState.isInitialized ? 'true' : '--'}</Text>
+        </Stack>
+
+        <Stack isInline>
+          <Text>Initializer account:</Text>
+          <Text>{escrowState.initializerAccountPubkey ?? '--'}</Text>
+        </Stack>
+
+        <Stack isInline>
+          <Text>X token temp account:</Text>
+          <Text>{escrowState.XTokenTempAccountPubkey ?? '--'}</Text>
+        </Stack>
+
+        <Stack isInline>
+          <Text>Initializer Y token account:</Text>
+          <Text>{escrowState.initializerYTokenAccount ?? '--'}</Text>
+        </Stack>
+
+        <Stack isInline>
+          <Text>Expected Amount:</Text>
+          <Text>{escrowState.expectedAmount ?? '--'}</Text>
+        </Stack>
       </Stack>
     </Stack>
   )
